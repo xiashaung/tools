@@ -58,8 +58,17 @@ class jpush
 
             $this->getClient()
                 ->push()
+                ->addAllAudience()
                 ->setPlatform($platform)
                 ->setNotificationAlert($this->content)
+                ->iosNotification($this->content, [
+                    'sound' => 'default',
+                    'badge' => '+1',
+                    'extras' => $this->extra])
+                ->androidNotification($this->content, [
+                    'title' => '云端金融',
+                    'priority' => 1,
+                    'extras' => $this->extra])
                 ->options($this->options)
                 ->send();
         }catch (JPushException $e) {
