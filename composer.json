@@ -8,12 +8,16 @@
             "email": "996190264@qq.com"
         }
     ],
+
+    "version":
+    "1.0.0",
     "autoload":{
         "psr-4":{
             "Tools\\": "src/"
         }
     },
     "require": {
+        "php":">=5.5.0",
         "jpush/jpush": "^3.5"
     }
 }
