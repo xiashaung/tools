@@ -1,0 +1,19 @@
+{
+    "name": "xiashuang/tools",
+    "description": "整理日常工具",
+    "license": "mit",
+    "authors": [
+        {
+            "name": "xia shuang",
+            "email": "996190264@qq.com"
+        }
+    ],
+    "autoload":{
+        "psr-4":{
+            "Tools\\": "src/"
+        }
+    },
+    "require": {
+        "jpush/jpush": "^3.5"
+    }
+}
