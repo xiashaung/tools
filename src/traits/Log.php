@@ -24,7 +24,7 @@ trait Log
      * @param $dirname string 项目名
      * @return Logger 返回logger 对象
      */
-    public  function records($name,$level,$dirname)
+    public  function record($name,$level,$dirname)
     {
         $this->log = \Tools\singleton\log::logInterface()->handle($name);
         $this->checkdir($dirname,$name);
