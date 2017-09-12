@@ -12,7 +12,7 @@ trait crypt
      * @param array $arr salt 加盐  cost递归层数
      * @return bool|string
      */
-     public  static  function crypt_encode(string $pwd,$algo,array $arr = ['cost'=>10])
+     public  static  function crypt_encode(string $pwd,$algo = 1,array $arr = ['cost'=>10])
      {
          return password_hash($pwd,$algo,$arr);
      }
@@ -34,7 +34,7 @@ trait crypt
      * @param array $arr salt 加盐  cost递归层数
      * @return string
      */
-    public static function crypt_rehash( string $hash,$algo, array $arr = ['cost'=>10])
+    public static function crypt_rehash( string $hash,$algo = 1, array $arr = ['cost'=>10])
     {
         return password_needs_rehash($hash,$algo,$arr) ;
     }

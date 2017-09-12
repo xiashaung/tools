@@ -13,15 +13,18 @@ class abc
 {
     use crypt,Log;
 
+    public  $log;
+
     public static function add()
     {
-        $add  = crypt::crypt_encode('qwewqe',1);
+        $add  = crypt::crypt_encode('qwewqe');
         return crypt::crypt_decode('qwewqe',$add);
     }
 
     public function log()
     {
-       $this->records('work','info','admin')->addInfo('这是个日志类');
+        $this->log = $this->records('work','info','admin');
+        $this->log->alert('asdasdasd',['a'=>'b']);
     }
 }
 

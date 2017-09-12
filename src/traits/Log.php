@@ -18,6 +18,12 @@ trait Log
         'alert'=>Logger::ALERT,
     ];
 
+    /**
+     * @param $name  string 所属文件夹名
+     * @param $level string 级别
+     * @param $dirname string 项目名
+     * @return Logger 返回logger 对象
+     */
     public  function records($name,$level,$dirname)
     {
         $this->log = \Tools\singleton\log::logInterface()->handle($name);
@@ -26,6 +32,10 @@ trait Log
         return $this->log;
     }
 
+    /**
+     * @param $dirname string 项目名
+     * @param $name  string 文件夹名
+     */
     protected function checkdir($dirname,$name)
     {
         if (!file_exists('/alidata/www/'.$dirname.'/log/'.$name)){
