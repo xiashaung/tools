@@ -1,8 +1,15 @@
 <?php
 namespace Tools\traits;
 
+use Monolog\Handler\ChromePHPHandler;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+
+/**
+ * Class Log
+ * @package Tools\traits
+ * 自定义日志类
+ */
 trait Log
 {
 
@@ -29,6 +36,19 @@ trait Log
         $this->log = \Tools\singleton\log::logInterface()->handle($name);
         $this->checkdir($dirname,$name);
        $this->log->pushHandler(new StreamHandler('/alidata/www/'.$dirname.'/log/'.$name.'/'.$name.'-'.date('Y-m-d').'.log',self::$level[$level]));
+        return $this->log;
+    }
+
+    /**
+     * 此方法用来把日志输出到chrome控制台
+     * @param $name string 调试的项目名
+     * @param $level string 级别
+     * @return Logger
+     */
+    public function chrome($name,$level)
+    {
+       $this->log = \Tools\singleton\log::logInterface()->handle($name);
+        $this->log->pushHandler(new ChromePHPHandler(self::$level[$level]));
         return $this->log;
     }
 

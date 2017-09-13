@@ -13,7 +13,7 @@ class abc
 {
     use crypt,Log;
 
-    public  $log;
+    public  $logs;
 
     public static function add()
     {
@@ -23,10 +23,22 @@ class abc
 
     public function log()
     {
-        $this->log = $this->records('work','info','admin');
-        $this->log->alert('asdasdasd',['a'=>'b']);
+        $this->logs = $this->record('work','info','admin');
+        $this->logs->alert('asdasdasd',['a'=>'b']);
     }
+
+    public function chromeLog()
+    {
+       $this->chrome('work','info')->info('asdsadsadasd');
+    }
+
+//    public function push()
+//    {
+//       $push = new \Tools\jpush\push('17712184635','all',['action'=>2]);
+//        $push->all();
+//    }
 }
 
   $abc = new abc();
 $abc->log();
+$abc->chromeLog();

@@ -1,12 +1,17 @@
 <?php
-namespace Tools;
+namespace Tools\jpush;
 
 use JPush\Client as jiguang;
 use JPush\Exceptions\APIRequestException;
 use JPush\Exceptions\JPushException;
-
+use tools\traits\Log;
 class jpush
 {
+    /**
+     * 日志记录类
+     */
+    use Log;
+
     protected  $app_key;
 
     protected  $app_secret;
@@ -72,9 +77,9 @@ class jpush
                 ->options($this->options)
                 ->send();
         }catch (JPushException $e) {
-            print  $e;
+            $this->record('jpush','warning','ydjr_api')->info('all: '.$e);
         }catch (APIRequestException $e){
-            print  $e;
+            $this->record('jpush','warning','ydjr_api')->info('all: '.$e);
         }
     }
 
@@ -98,9 +103,9 @@ class jpush
                         ->options($this->options)
                         ->send();
                 }catch (JPushException $e) {
-                    print  $e;
+                    $this->record('jpush','warning','ydjr_api')->info('ios: '.$e);
                 }catch (APIRequestException $e){
-                    print  $e;
+                    $this->record('jpush','warning','ydjr_api')->info('ios: '.$e);
                 }
             }
         }else{
@@ -116,9 +121,9 @@ class jpush
                     ->options($this->options)
                     ->send();
             }catch (JPushException $e) {
-                print  $e;
+                $this->record('jpush','warning','ydjr_api')->info('ios: '.$e);
             }catch (APIRequestException $e){
-                print  $e;
+                $this->record('jpush','warning','ydjr_api')->info('ios: '.$e);
             }
         }
     }
@@ -143,9 +148,9 @@ class jpush
                         ->options($this->options)
                         ->send();
                 }catch (JPushException $e) {
-                    print  $e;
+                    $this->record('jpush','warning','ydjr_api')->info('andriod: '.$e);
                 }catch (APIRequestException $e){
-                    print  $e;
+                    $this->record('jpush','warning','ydjr_api')->info('andriod: '.$e);
                 }
             }
         }else{
@@ -161,9 +166,9 @@ class jpush
                     ->options($this->options)
                     ->send();
             }catch (JPushException $e) {
-                print  $e;
+                $this->record('jpush','warning','ydjr_api')->info('andriod: '.$e);
             }catch (APIRequestException $e){
-                print  $e;
+                $this->record('jpush','warning','ydjr_api')->info('andriod: '.$e);
             }
         }
     }
@@ -173,7 +178,7 @@ class jpush
      */
     public function getClient()
     {
-        return $this->client = new jiguang($this->app_key,$this->app_secret,'/alidata/www/nadmin/jpush.log');
+        return $this->client = new jiguang($this->app_key,$this->app_secret);
     }
 
     /**
