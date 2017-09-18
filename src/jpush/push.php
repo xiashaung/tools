@@ -66,6 +66,9 @@ class push
         }
     }
 
+    /**
+     * 全员推送 慎用
+     */
     public function all()
     {
         $this->andriodAll();

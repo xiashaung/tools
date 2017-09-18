@@ -4,7 +4,7 @@ namespace Tools\jpush;
 use JPush\Client as jiguang;
 use JPush\Exceptions\APIRequestException;
 use JPush\Exceptions\JPushException;
-use tools\traits\Log;
+use Tools\traits\Log;
 class jpush
 {
     /**
@@ -60,7 +60,6 @@ class jpush
     public function all($platform)
     {
         try{
-
             $this->getClient()
                 ->push()
                 ->addAllAudience()
