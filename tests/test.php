@@ -5,7 +5,7 @@
  * Date: 2017/9/11
  * Time: 14:56
  */
-require '../../vendor/autoload.php';
+require '../vendor/autoload.php';
 use Tools\traits\crypt;
 use Tools\traits\Log;
 
