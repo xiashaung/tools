@@ -66,7 +66,7 @@ class RedisInstance
         if (!$redis){
             throw new \Exception('redis client config not found');
         };
-        $redis->select($args[count($args)-1]);
+        $redis->select(isset($args[count($args)-1])?:1);
         unset($args[count($args)-1]);
         switch (count($args)) {
             case 0:
