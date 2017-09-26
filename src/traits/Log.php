@@ -13,8 +13,6 @@ use Monolog\Handler\StreamHandler;
 trait Log
 {
 
-    protected static $level;
-
     public static  $log;
 
     protected static $levels = [

@@ -58,12 +58,38 @@ class tools
     /**
      * @param $time string 需要加减的时间
      * @param $next string 下一个日期 如 next Monday
-     * @return string 返回加减的字符串
+     * @return string 返回获得的真实时间
      */
     public static function timeMod($time,$next)
     {
         $dateObj = new DateTime($time);
         $dateObj->modify($next);
         return $dateObj->format('Y-m-d H:i:s');
+    }
+
+    /**
+     * 不带时分秒的时间差
+     * @param $start_time string 开始时间
+     * @param $end_time  string 结束时间
+     * @return DateInterval|false
+     */
+    public static function subTime($start_time,$end_time)
+    {
+       $st = date_create(date('Y-m-d',strtotime($start_time)));
+       $et = date_create(date('Y-m-d',strtotime($end_time)));
+        return date_diff($st,$et);
+    }
+
+    /**
+     * 带时分秒的时间差
+     * @param $start_time string 开始时间
+     * @param $end_time  string 结束时间
+     * @return DateInterval|false
+     */
+    public static function subTimeWithHis($start_time,$end_time)
+    {
+        $st = date_create($start_time);
+        $et = date_create($end_time);
+        return date_diff($st,$et);
     }
 }

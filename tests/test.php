@@ -8,7 +8,7 @@
 require '../vendor/autoload.php';
 use Tools\traits\crypt;
 use Tools\traits\Log;
-
+use Tools\singleton\Redis;
 class abc
 {
     use crypt,Log;
@@ -39,6 +39,8 @@ class abc
 //    }
 }
 
-  $abc = new abc();
-$abc->log();
-$abc->chromeLog();
+//  $abc = new abc();
+//$abc->log();
+//$abc->chromeLog();
+
+echo Redis::set('a','abcd',4);
