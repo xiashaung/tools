@@ -11,5 +11,5 @@ namespace Tools\singleton;
 
 class Redis  extends RedisInstance
 {
-
+    public static $database = 1;
 }

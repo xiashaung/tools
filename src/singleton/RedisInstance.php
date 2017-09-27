@@ -7,6 +7,8 @@ class RedisInstance
 {
     protected static $instance;
 
+    public static $database;
+
     protected static function getInstance()
     {
         if (!static::$instance){
@@ -66,8 +68,10 @@ class RedisInstance
         if (!$redis){
             throw new \Exception('redis client config not found');
         };
-        $redis->select(isset($args[count($args)-1])?:1);
-        unset($args[count($args)-1]);
+        if (!static::$database){
+            throw new \Exception('database must be set!');
+        }
+        $redis->select(static::$database);
         switch (count($args)) {
             case 0:
                 return $redis->$method();
