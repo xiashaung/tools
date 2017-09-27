@@ -19,25 +19,32 @@ class RedisInstance
     }
 
     /**
-     * @return \Redis
-     * redis本地连接
+     * @return bool|\Redis
      */
     protected static  function localhost()
     {
         $redis = new \Redis();
-        $redis->connect('127.0.0.1',6379);
+       try{
+           $redis->connect('127.0.0.1',6379);
+       }catch (\RedisException $e){
+          return false;
+       }
         return $redis;
     }
 
     /**
-     * @return \Redis
-     * * thinkPHP的连接redis方式
+     * @return bool|\Redis
+     * thinkPHP的连接redis方式
      */
     protected static function thinkPHP()
     {
         $redis  = new \Redis();
-        $redis->connect(C('redis_init.IP'), C('redis_init.PORT'));
-        $redis->auth(C('redis_init.pwd'));
+        try{
+            $redis->connect(C('redis_init.IP'), C('redis_init.PORT'));
+            $redis->auth(C('redis_init.pwd'));
+        }catch (\RedisException $e){
+            return  false;
+        }
         return $redis;
     }
 
