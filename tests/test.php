@@ -42,5 +42,5 @@ class abc
 //  $abc = new abc();
 //$abc->log();
 //$abc->chromeLog();
+Redis::set(a,a);
 
-echo Redis::set('abcd','abcd');
