@@ -1,4 +1,5 @@
 <?php
+namespace  Tools\tools;
 
 class tools
 {
@@ -19,8 +20,8 @@ class tools
         if (!checkdate($timeArr[1],$timeArr[2],$timeArr[0])){
           return false;
         }
-       $now = new DateTime();
-        $then = DateTime::createFromFormat('Y-m-d',date('Y-m-d',$time));
+       $now = new \DateTime();
+        $then = \DateTime::createFromFormat('Y-m-d',date('Y-m-d',$time));
         $age = $now->diff($then);
         if ( ($age->y>$minAge) && ($age->y<=$maxAge)){
             return $age;
@@ -36,8 +37,8 @@ class tools
      */
     public static function timeAdd($time,$add)
     {
-        $dateObj = new DateTime($time);
-        $dateIntervalObj = new DateInterval($add);
+        $dateObj = new \DateTime($time);
+        $dateIntervalObj = new \DateInterval($add);
         $dateObj->add($dateIntervalObj);
         return $dateObj->format('Y-m-d H:i:s');
     }
@@ -49,8 +50,8 @@ class tools
      */
     public static function timeSub($time,$add)
     {
-        $dateObj = new DateTime($time);
-        $dateIntervalObj = new DateInterval($add);
+        $dateObj = new \DateTime($time);
+        $dateIntervalObj = new \DateInterval($add);
         $dateObj->sub($dateIntervalObj);
         return $dateObj->format('Y-m-d H:i:s');
     }
@@ -62,7 +63,7 @@ class tools
      */
     public static function timeMod($time,$next)
     {
-        $dateObj = new DateTime($time);
+        $dateObj = new \DateTime($time);
         $dateObj->modify($next);
         return $dateObj->format('Y-m-d H:i:s');
     }
@@ -71,7 +72,7 @@ class tools
      * 不带时分秒的时间差
      * @param $start_time string 开始时间
      * @param $end_time  string 结束时间
-     * @return DateInterval|false
+     * @return \DateInterval|false
      */
     public static function subTime($start_time,$end_time)
     {
@@ -84,7 +85,7 @@ class tools
      * 带时分秒的时间差
      * @param $start_time string 开始时间
      * @param $end_time  string 结束时间
-     * @return DateInterval|false
+     * @return \DateInterval|false
      */
     public static function subTimeWithHis($start_time,$end_time)
     {
@@ -150,6 +151,30 @@ class tools
         );
 
         return $area[$key];
+    }
+
+    /**
+     * @param $amount float  需格式化的金额
+     * @param $round  int round函数保留的小数位数
+     * @return string 返回格式化后的数据
+     */
+    public static function formatAmount($amount,$round = 2)
+    {
+       $list = str_split(strrev((int)$amount),4);
+        $count = count($list);
+        if ($count==1){
+            return round($amount,2).'元';
+        }
+        if ($count==2){
+            return round(strrev($list[1]).'.'.$list[0],$round).'万元';
+        }
+        if ($count==3){
+            return round(strrev($list[2]).'.'.$list[1],$round).'亿';
+        }
+        if ($count==4){
+            return round(strrev($list[2]).'.'.$list[1],$round).'万亿';
+        }
+
     }
 
 }

@@ -9,6 +9,7 @@ require '../vendor/autoload.php';
 use Tools\traits\crypt;
 use Tools\traits\Log;
 use Tools\singleton\Redis;
+use Tools\tools\tools;
 class abc
 {
     use crypt,Log;
@@ -38,9 +39,13 @@ class abc
 //        $push->all();
 //    }
 }
+$num = 12312345;
 
-//  $abc = new abc();
-//$abc->log();
-//$abc->chromeLog();
-Redis::set(a,a);
+function asdsad(\Tools\tools\Request $request)
+{
+   $request::createFromGlobals();
+}
+
+Redis::set
+
 
