@@ -2,14 +2,10 @@
 
 namespace Tools\tools;
 
-use \Symfony\Component\HttpFoundation\Request as fromRequest;
 
-class Request  extends  fromRequest
+use Tools\singleton\RequestInstance;
+
+class Request extends RequestInstance
 {
-    public function instance()
-    {
-        self::createFromGlobals();
 
-        return $this->query;
-    }
 }

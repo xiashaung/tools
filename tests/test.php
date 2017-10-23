@@ -39,13 +39,23 @@ class abc
 //        $push->all();
 //    }
 }
-$num = 12312345;
 
-function asdsad(\Tools\tools\Request $request)
+function task1()
 {
-   $request::createFromGlobals();
+    for ($i=1;$i<=5;$i++){
+        echo "This is task 1 iteration $i.\n";
+        yield;
+    }
 }
 
-Redis::set
+function task2()
+{
+    for ($i=1;$i<=10;$i++){
+        echo "This is task 2 iteration $i.\n";
+        yield;
+    }
+}
 
+var_dump(\Tools\tools\Request::input());
+ echo '<pre>';
 
