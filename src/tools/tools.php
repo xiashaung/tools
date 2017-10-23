@@ -163,10 +163,10 @@ class tools
        $list = str_split(strrev((int)$amount),4);
         $count = count($list);
         if ($count==1){
-            return round($amount,2).'元';
+            return round($amount,$round).'元';
         }
         if ($count==2){
-            return round(strrev($list[1]).'.'.$list[0],$round).'万元';
+            return round(strrev($list[1]).'.'.$list[0],$round).'万';
         }
         if ($count==3){
             return round(strrev($list[2]).'.'.$list[1],$round).'亿';
