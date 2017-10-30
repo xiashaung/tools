@@ -6,7 +6,6 @@
  * Time: 14:56
  */
 require '../vendor/autoload.php';
-require '../src/singleton/ThreadSingleton.php';
 use Tools\traits\crypt;
 use Tools\traits\Log;
 use Tools\singleton\Redis;

@@ -1,7 +1,6 @@
 <?php
 namespace Tools\traits;
 
-require  '../../vendor/autoload.php';
 use Monolog\Handler\ChromePHPHandler;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
