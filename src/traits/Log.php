@@ -1,10 +1,11 @@
 <?php
 namespace Tools\traits;
 
+require  '../../vendor/autoload.php';
 use Monolog\Handler\ChromePHPHandler;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-
+use Tools\singleton\logs;
 /**
  * Class Log
  * @package Tools\traits
@@ -31,9 +32,9 @@ trait Log
      */
     public static  function record($name,$level,$dirname)
     {
-        self::$log = \Tools\singleton\log::logInterface()->handle($name);
+        self::$log = logs::logInterface()->handle($name);
         static::checkdir($dirname,$name);
-        self::$log->pushHandler(new StreamHandler('/alidata/www/'.$dirname.'/log/'.$name.'/'.$name.'-'.date('Y-m-d').'.log',self::$level[$level]));
+        self::$log->pushHandler(new StreamHandler('/alidata/www/'.$dirname.'/log/'.$name.'/'.$name.'-'.date('Y-m-d').'.log',self::$levels[$level]));
         return self::$log;
     }
 
@@ -46,7 +47,7 @@ trait Log
     public static function chrome($name,$level)
     {
         self::$log = \Tools\singleton\log::logInterface()->handle($name);
-        self::$log->pushHandler(new ChromePHPHandler(self::$level[$level]));
+        self::$log->pushHandler(new ChromePHPHandler(self::$levels[$level]));
         return self::$log;
     }
 

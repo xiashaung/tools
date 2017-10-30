@@ -1,22 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: xiashuang
- * Date: 2017/9/11
- * Time: 16:39
- */
-
 namespace Tools\singleton;
 
 use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
 
 /**
  * Class log
  * @package Tools\singleton
  * 单例 实例化monolog日志
  */
-class log
+class logs
 {
    private static $log;
 

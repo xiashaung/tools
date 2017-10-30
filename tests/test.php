@@ -6,13 +6,15 @@
  * Time: 14:56
  */
 require '../vendor/autoload.php';
+require '../src/singleton/ThreadSingleton.php';
 use Tools\traits\crypt;
 use Tools\traits\Log;
 use Tools\singleton\Redis;
 use Tools\tools\tools;
+use \Tools\singleton\ThreadSingleton;
 class abc
 {
-    use crypt,Log;
+//    use Log;
 
     public  $logs;
 
@@ -24,13 +26,13 @@ class abc
 
     public function log()
     {
-        $this->logs = $this->record('work','info','admin');
-        $this->logs->alert('asdasdasd',['a'=>'b']);
+//        $this->logs = $this->record('work','info','admin');
+//        $this->logs->alert('asdasdasd',['a'=>'b']);
     }
 
     public function chromeLog()
     {
-       $this->chrome('work','info')->info('asdsadsadasd');
+//       $this->chrome('work','info')->info('asdsadsadasd');
     }
 
 //    public function push()
@@ -40,22 +42,92 @@ class abc
 //    }
 }
 
-function task1()
+//function task1()
+//{
+//    for ($i=1;$i<=5;$i++){
+//        echo "This is task 1 iteration $i.\n";
+//        yield;
+//    }
+//}
+//
+//function task2()
+//{
+//    for ($i=1;$i<=10;$i++){
+//        echo "This is task 2 iteration $i.\n";
+//        yield;
+//    }
+//}
+//\Tools\tools\Thread::run('https://imxs.top?message=记录日志111');
+
+//$th = new ThreadSingleton('https://imxs.top');
+//$th->start();
+//var_dump($th->datas);
+
+class tests
 {
-    for ($i=1;$i<=5;$i++){
-        echo "This is task 1 iteration $i.\n";
-        yield;
+    function index()
+    {
+        $k = 0;
+       for ($i=0;$i<10000;$i++){
+            $k += $i;
+       }
+       return $k;
     }
 }
 
-function task2()
+class tests1
 {
-    for ($i=1;$i<=10;$i++){
-        echo "This is task 2 iteration $i.\n";
-        yield;
+    function index()
+    {
+        ini_set('memory_limit',0);
+        for ($i=0;$i<1000;$i++){
+//            $file = fopen('/users/xiashuang/Desktop/www/tools/tests/test.log','a+');
+//            fwrite($file,'测试日志记录'.$i);
+//            fclose($file);
+        }
+        return 11111;
     }
 }
 
-var_dump(\Tools\tools\Request::input());
- echo '<pre>';
+class tests2
+{
+    function index()
+    {
+        $k = 0;
+        for ($i=0;$i<10000;$i++){
+            $k += $i;
+        }
+        return $k;
+    }
+}
+
+class tests4
+{
+    function index()
+    {
+        return '执行过后的方法4';
+    }
+}
+ $tes[] = new tests();
+ $tes[] = new tests1();
+ $tes[] = new tests2();
+ $tes[] = new tests4();
+
+//echo $test->index();
+//$th = \Tools\tools\Thread::method($test,'index');
+//echo $th->data;
+foreach ($tes as $k){
+    $list[] = \Tools\tools\Thread::method($k,'index');
+}
+
+//foreach ($tes as $k){
+//    echo $k->data.PHP_EOL;
+//}
+echo '<pre>';
+var_dump($list);
+
+//var_dump(\Tools\tools\Thread::run('https://imxs.top'));
+
+
+
 
