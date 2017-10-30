@@ -54,12 +54,7 @@ class RedisInstance
      */
     protected static function connect()
     {
-        if (static::thinkPHP()){
-            return static::thinkPHP();
-        }
-        if (static::localhost()){
-            return static::localhost();
-        }
+        return static::thinkPHP();
     }
 
     /**
