@@ -166,13 +166,13 @@ class tools
             return round($amount,$round).'元';
         }
         if ($count==2){
-            return round(strrev($list[1]).'.'.$list[0],$round).'万';
+            return round(strrev($list[1]).'.'.strrev($list[0]),$round).'万';
         }
         if ($count==3){
-            return round(strrev($list[2]).'.'.$list[1],$round).'亿';
+            return round(strrev($list[2]).'.'.strrev($list[1]),$round).'亿';
         }
         if ($count==4){
-            return round(strrev($list[2]).'.'.$list[1],$round).'万亿';
+            return round(strrev($list[2]).'.'.strrev($list[1]),$round).'万亿';
         }
 
     }
