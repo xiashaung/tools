@@ -1,69 +1,68 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: xiashuang
- * Date: 2017/11/1
- * Time: 10:52
- */
+require_once "../vendor/autoload.php";
+function task1()
+{
+    for ($i=1;$i<5;$i++){
+        echo "task1 runing $i \n";
+        yield;
+    }
+}
+
+function task2()
+{
+    for ($i=1;$i<8;$i++){
+        echo "task2 runing $i \n";
+        yield;
+    }
+}
+
+function getTaskId()
+{
+    return new \Tools\Coroutine\SystemCall(function(\Tools\Coroutine\Task $task,\Tools\Coroutine\Scheduler $scheduler){
+        $task->setSendValue($task->getTaskId());
+        $scheduler->schedule($task);
+    });
+}
+
+function newTask(\Generator $generator)
+{
+    return new \Tools\Coroutine\SystemCall(function(\Tools\Coroutine\Task $task,\Tools\Coroutine\Scheduler $scheduler)use($generator){
+        $task->setSendValue($scheduler->newTask($generator));
+        $scheduler->schedule($task);
+    });
+}
+
+function killTask($tid)
+{
+    return new \Tools\Coroutine\SystemCall(function(\Tools\Coroutine\Task $task,\Tools\Coroutine\Scheduler $scheduler)use($tid){
+        $task->setSendValue($scheduler->killTask($tid));
+        $scheduler->schedule($task);
+    });
+}
+
+function task(){
+    $tid = (yield getTaskId());
+    $childTid = (yield newTask(childTask()));
+
+    for ($i = 1; $i <= 6; $i++) {
+        echo "Parent task $tid iteration $i.\n";
+        yield;
+
+        if ($i == 3) yield killTask($childTid);
+    }
+}
+
+function childTask() {
+    $tid = (yield getTaskId());
+    while (true) {
+        echo "Child task $tid still alive!\n";
+        yield;
+    }
+}
 
 
-//    public function test()
-//    {
-//        Redis::set('testa',time());
-//    }
-//
-//    /**
-//     * 'accumUserDealAmount'=>$this->getAccumUserDealAmount(),
-//    'accumUserEarnings'=>$this->getAccumUserEarnings(),
-//    'regUserCount'=>$this->getRegUserCount(),
-//    'accumUserDealCount'=>$this->getAccumUserDealCount(),
-//    'accumDueUser'=>$this->getAccumDueUser(),
-//    'singleDueUser'=>$this->getSingleDueUser(),
-//    'highestCountDueUser'=>$this->getHighestCountDueUser(),
-//    'accumProvinceAmount'=>$this->getAccumProvinceAmount(),
-//    'highestInvestSuccessUser'=>$this->getHighestInvestSuccessUser(),
-//     */
-//    public function test1()
-//    {
-//        $arr = [];
-//        $arr1 = [];
-//        $list = [
-//            'getAccumUserDealAmount',
-//            'getAccumUserEarnings',
-//            'getRegUserCount',
-////            'getAccumUserDealCount',
-////            'getAccumDueUser',
-//            'getSingleDueUser',
-////            'getHighestCountDueUser',
-////            'getAccumProvinceAmount',
-////            'getHighestInvestSuccessUser',
-//        ];
-//
-////        $this->getSingleDueUser();
-//////
-//        $th = new ApiController($this,'getSingleDueUser');
-//        $th->start();
-//         echo '<pre>';
-//        while($th->isRunning()){
-//            usleep(10);
-//        }
-//        if ($th->join()){
-//             var_dump($th);
-//        }
-////        $st = microtime(true);
-////        foreach ($list as $k => $v){
-////            $arr[$k] = new ApiController($this,$v);
-////            $arr[$k]->start();
-////        }
-////        foreach ($arr as $k => $v){
-////            while($arr[$k]->isRunning()){
-////                usleep(10);
-////            }
-////            if ($arr[$k]->join()){
-////                var_dump($arr[$k]->data);
-////            }
-////        }
-////        $et =  microtime(true);
-////        var_dump($arr1);
-////        echo '总用用时'.($et-$st);
-//    }
+$sch  = new \Tools\Coroutine\Scheduler();
+
+$sch->newTask(task());
+
+$sch->run();
