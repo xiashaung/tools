@@ -10,7 +10,7 @@
     ],
 
     "version":
-    "1.0.0",
+    "1.0.2",
     "autoload":{
         "psr-4":{
             "Tools\\": "src/"
