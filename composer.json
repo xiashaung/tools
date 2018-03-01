@@ -18,11 +18,12 @@
     },
     "require": {
         "php":">=5.5.0",
-        "jpush/jpush": "^3.5",
-        "monolog/monolog": "^1.23",
-        "symfony/http-foundation": "^3.3",
+        "symfony/http-foundation": "4.0.*",
         "symfony/validator": "^3.3",
-        "krakjoe/pthreads-polyfill": "^1.1",
-        "php-ai/php-ml": "^0.5.0"
+        "krakjoe/pthreads-polyfill": "^1.1"
+    },
+    "require-dev": {
+        "jpush/jpush": "^3.5",
+        "monolog/monolog": "^1.23"
     }
 }
