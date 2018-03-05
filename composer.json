@@ -23,7 +23,6 @@
     },
     "require-dev": {
         "jpush/jpush": "^3.5",
-        "symfony/validator": "^3.3",
         "monolog/monolog": "^1.23"
     }
 }
