@@ -26,12 +26,12 @@ class RequestInstance extends fromRequest
      * @return mixed
      * 获取字段值
      */
-   public static function input($key = null)
+   public static function input($key = null,$default = null)
    {
       if (!$key){
           return static::all();
       }else{
-          return static::instance()->get($key);
+          return static::instance()->get($key,$default = null);
       }
    }
 
@@ -72,4 +72,5 @@ class RequestInstance extends fromRequest
     {
         return static::method()->$method(...$args);
     }
+
 }
